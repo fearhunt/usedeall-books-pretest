@@ -14,6 +14,9 @@ module.exports = {
         "accent-green": "008A87",
         "accent-orange": "#FA6B26",
         "accent-blue": "#1578CE"
+      },
+      container: {
+        center: true
       }
     },
   },
