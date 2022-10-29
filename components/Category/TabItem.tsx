@@ -1,18 +1,31 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-const CategoryTab = () => {
+type TabItemProps = {
+  category: {
+    id: number,
+    name: string
+  };
+  isSelected: boolean
+}
+
+const CategoryTab = (props: TabItemProps) => {
   const router = useRouter();
 
-  const testClick = () => {
-    console.log(router.query)
-    console.log("Category select")
+  const changeCategory = (id: number) => {
+    router.push({
+      query: {
+        categoryId: id
+      }
+    });
+
+    console.log("Category selected")
   }
 
   return (
     <li className="list-none inline">
-      <button onClick={testClick} className={true ? 'tab-btn tab-btn-selected' : 'tab-btn'}>
-        Category Name
+      <button onClick={() => changeCategory(props.category.id)} className={true ? 'tab-btn tab-btn-selected' : 'tab-btn'}>
+        {props.category.name}
       </button>
     </li>
   )
