@@ -5,17 +5,6 @@ type Book = {
 
 }
 
-const getRandomizedBackgroundGradient = () => {
-  const colors = [ "accent-red", "accent-green", "accent-orange", "accent-blue" ];
-  const gradientDirections = [ "tl", "tr", "bl", "br" ];
-
-  const randomFirstColor = colors[Math.floor(Math.random() * colors.length)];
-  const randomSecondColor = colors[Math.floor(Math.random() * colors.length)];
-  const randomGradientDirection = gradientDirections[Math.floor(Math.random() * gradientDirections.length)];
-
-  return `bg-gradient-to-${randomGradientDirection} from-${randomFirstColor} to-${randomSecondColor}`
-};
-
 const BookCard = (book: Book) => {
   return (
     <div onClick={() => console.log('a')} className="bg-gradient-to-br from-accent-orange to-accent-red cursor-pointer rounded-lg shadow-lg transition-all hover:scale-105 p-5 md:px-8 md:py-6 mt-20">

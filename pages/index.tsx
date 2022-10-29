@@ -1,5 +1,6 @@
+import React from "react";
 import Head from "next/head";
-import Image from "next/image";
+import type { NextPage } from "next";
 import { GetServerSideProps } from "next";
 
 import axios from "axios";
@@ -7,7 +8,23 @@ import axios from "axios";
 import BookGrid from "../components/Book/Grid";
 import CategoryList from "../components/Category/List";
 
-function Home() {
+type HomeProps = {
+  books: {
+    id: number;
+    title: string;
+    category_id: number;
+    authors: string[];
+    cover_url: string;
+    description: string;
+    sections: {
+      title: string;
+      content: string;
+    }[];
+    audio_length: number;
+  }[];
+}
+
+const Home: NextPage<HomeProps> = ({ books }) => {
   return (
     <>
       <Head>
@@ -27,9 +44,6 @@ function Home() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // TODO Create type on index
-  let books = [];
-
   const booksConfig = {
     params: {
       categoryId: context.query.categoryId ?? 1,
@@ -38,17 +52,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   }
 
-  await axios.get("https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-books", booksConfig)
-    .then((res) => {
-      books = res.data;
-    }).catch((err) => {
-      console.error(err);
-      // const statusCode = err.response.status\;
-    });
-
+  const booksRes = await axios.get("https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-books", booksConfig);
+  
   return {
     props: {
-      books: books
+      books: booksRes.data
     }
   }
 }
