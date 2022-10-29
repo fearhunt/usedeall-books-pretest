@@ -16,7 +16,8 @@ module.exports = {
         "accent-blue": "#1578CE"
       },
       container: {
-        center: true
+        center: true,
+        padding: "1.5rem"
       }
     },
   },

@@ -4,6 +4,7 @@ import { GetServerSideProps } from "next";
 
 import axios from "axios";
 
+import BookGrid from "../components/Book/Grid";
 import BookCard from "../components/Book/BookCard";
 import styles from "../styles/Home.module.css";
 
@@ -16,8 +17,10 @@ function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <BookCard />
+      <main>
+        <div className="container py-8">
+          <BookGrid />
+        </div>
       </main>
     </>
   )
