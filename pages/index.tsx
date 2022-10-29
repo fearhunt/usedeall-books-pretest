@@ -10,17 +10,17 @@ import CategoryList from "../components/Category/List";
 
 type HomeProps = {
   books: {
-    id: number;
-    title: string;
-    category_id: number;
-    authors: string[];
-    cover_url: string;
-    description: string;
+    id: number,
+    title: string,
+    category_id: number,
+    authors: string[],
+    cover_url: string,
+    description: string,
     sections: {
-      title: string;
-      content: string;
+      title: string,
+      content: string
     }[];
-    audio_length: number;
+    audio_length: number
   }[];
 }
 
