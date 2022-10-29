@@ -1,8 +1,12 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { GetServerSideProps } from "next";
+import Head from "next/head";
+import Image from "next/image";
 
-export default function Home() {
+import axios from "axios";
+
+import styles from "../styles/Home.module.css";
+
+function Home() {
   return (
     <div className={styles.container}>
       <Head>
@@ -69,3 +73,31 @@ export default function Home() {
     </div>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  let books = [];
+
+  const booksConfig = {
+    params: {
+      categoryId: context.query.categoryId ?? 1,
+      page: context.query.page ?? 1,
+      size: context.query.size ?? 10, 
+    }
+  }
+
+  await axios.get("https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-books", booksConfig)
+    .then((res) => {
+      books = res.data;
+    }).catch((err) => {
+      console.error(err);
+      // const statusCode = err.response.status\;
+    });
+
+  return {
+    props: {
+      books: books
+    }
+  }
+}
+
+export default Home;
