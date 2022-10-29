@@ -19,6 +19,16 @@ a {
   box-sizing: border-box;
 }
 
+@layer components {
+  .tab-btn {
+    @apply border border-gray-800/10 py-0.5 px-3 rounded-full text-sm font-medium;
+  }
+
+  .tab-btn-selected {
+    @apply bg-gradient-to-tl from-primary to-accent-blue border-transparent text-white;
+  }
+}
+
 /* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

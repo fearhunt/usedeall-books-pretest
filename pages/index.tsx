@@ -5,8 +5,7 @@ import { GetServerSideProps } from "next";
 import axios from "axios";
 
 import BookGrid from "../components/Book/Grid";
-import BookCard from "../components/Book/BookCard";
-import styles from "../styles/Home.module.css";
+import CategoryList from "../components/Category/List";
 
 function Home() {
   return (
@@ -19,6 +18,7 @@ function Home() {
 
       <main>
         <div className="container py-8">
+          <CategoryList />
           <BookGrid />
         </div>
       </main>
