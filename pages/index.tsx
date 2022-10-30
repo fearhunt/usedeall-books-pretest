@@ -31,8 +31,6 @@ type HomeProps = {
 }
 
 const Home: NextPage<HomeProps> = ({ categories, books }) => {
-  console.log(categories)
-  console.log(books)
   return (
     <>
       <Head>
@@ -44,8 +42,11 @@ const Home: NextPage<HomeProps> = ({ categories, books }) => {
       <main>
         <div className="container py-8">
           <BookSearch />
-          <CategoryList />
+
+          <CategoryList categories={categories} />
+
           <BookGrid />
+
           <PaginationButton />
         </div>
       </main>

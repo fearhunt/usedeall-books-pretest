@@ -3,10 +3,9 @@ import { useRouter } from "next/router";
 
 type TabItemProps = {
   category: {
-    id: number,
-    name: string
+    id: number;
+    name: string;
   };
-  isSelected: boolean
 }
 
 const CategoryTab = (props: TabItemProps) => {
@@ -18,13 +17,17 @@ const CategoryTab = (props: TabItemProps) => {
         categoryId: id
       }
     });
+  };
 
-    console.log("Category selected")
+  const isSelected = (id: number): boolean => {
+    const currentCategory = router.query.categoryId || "1";
+
+    return id.toString() === currentCategory;  
   }
 
   return (
     <li className="list-none inline">
-      <button onClick={() => changeCategory(props.category.id)} className={true ? 'tab-btn tab-btn-selected' : 'tab-btn'}>
+      <button onClick={() => changeCategory(props.category.id)} className={isSelected(props.category.id) ? 'tab-btn tab-btn-selected' : 'tab-btn'}>
         {props.category.name}
       </button>
     </li>

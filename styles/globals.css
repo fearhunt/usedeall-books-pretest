@@ -21,11 +21,11 @@ a {
 
 @layer components {
   .tab-btn {
-    @apply border border-gray-800/10 py-0.5 px-3 rounded-full text-sm font-medium;
+    @apply border border-gray-800/10 py-0.5 px-3 rounded-full text-sm text-gray-700;
   }
 
   .tab-btn-selected {
-    @apply bg-gradient-to-tl from-primary to-accent-blue border-transparent text-white;
+    @apply bg-gradient-to-tl from-primary to-accent-blue border-transparent font-medium text-white;
   }
 }
 
