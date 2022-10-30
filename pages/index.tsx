@@ -11,6 +11,10 @@ import CategoryList from "../components/Category/List";
 import PaginationButton from "../components/Pagination/Button";
 
 type HomeProps = {
+  categories: {
+    id: number;
+    name: string;
+  }[];
   books: {
     id: number;
     title: string;
@@ -26,7 +30,9 @@ type HomeProps = {
   }[];
 }
 
-const Home: NextPage<HomeProps> = ({ books }) => {
+const Home: NextPage<HomeProps> = ({ categories, books }) => {
+  console.log(categories)
+  console.log(books)
   return (
     <>
       <Head>
@@ -48,6 +54,8 @@ const Home: NextPage<HomeProps> = ({ books }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const categoriesRes = await axios.get("https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-categories");
+
   const booksConfig = {
     params: {
       categoryId: context.query.categoryId ?? 1,
@@ -60,6 +68,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   
   return {
     props: {
+      categories: categoriesRes.data,
       books: booksRes.data
     }
   }
