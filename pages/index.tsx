@@ -5,6 +5,7 @@ import { GetServerSideProps } from "next";
 
 import axios from "axios";
 
+import BookSearch from "../components/Book/Search";
 import BookGrid from "../components/Book/Grid";
 import CategoryList from "../components/Category/List";
 import PaginationButton from "../components/Pagination/Button";
@@ -36,6 +37,7 @@ const Home: NextPage<HomeProps> = ({ books }) => {
 
       <main>
         <div className="container py-8">
+          <BookSearch />
           <CategoryList />
           <BookGrid />
           <PaginationButton />
