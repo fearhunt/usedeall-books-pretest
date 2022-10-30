@@ -7,6 +7,7 @@ import axios from "axios";
 
 import BookGrid from "../components/Book/Grid";
 import CategoryList from "../components/Category/List";
+import PaginationButton from "../components/Pagination/Button";
 
 type HomeProps = {
   books: {
@@ -37,6 +38,7 @@ const Home: NextPage<HomeProps> = ({ books }) => {
         <div className="container py-8">
           <CategoryList />
           <BookGrid />
+          <PaginationButton />
         </div>
       </main>
     </>
