@@ -45,7 +45,7 @@ const Home: NextPage<HomeProps> = ({ categories, books }) => {
 
           <CategoryList categories={categories} />
 
-          <BookGrid />
+          <BookGrid books={books} />
 
           <PaginationButton />
         </div>
@@ -61,7 +61,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     params: {
       categoryId: context.query.categoryId ?? 1,
       page: context.query.page ?? 1,
-      size: context.query.size ?? 10, 
+      size: context.query.size ?? 12, 
     }
   }
 

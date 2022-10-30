@@ -11,7 +11,7 @@ type CategoryListProps = {
 
 const CategoryList = (props: CategoryListProps) => {
   return (
-    <ul className="overflow-x-auto py-2 pl-0 my-4 whitespace-nowrap space-x-4">
+    <ul className="overflow-x-auto py-2 pl-0 my-2 whitespace-nowrap space-x-4">
       {props.categories.map((category: any, index: number) => (
         <CategoryTabItem key={index} category={category} />
       ))}
