@@ -47,7 +47,10 @@ const Home: NextPage<HomeProps> = ({ categories, books }) => {
 
           <BookGrid books={books} />
 
-          <PaginationButton />
+          <div className="mt-5 text-right space-x-2">
+            <PaginationButton text="Previous" type="prev" />
+            <PaginationButton text="Next" type="next" booksSize={books.length} />
+          </div>
         </div>
       </main>
     </>
@@ -60,13 +63,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const booksConfig = {
     params: {
       categoryId: context.query.categoryId ?? 1,
-      page: context.query.page ?? 1,
+      page: context.query.page ?? 0,
       size: context.query.size ?? 12, 
     }
   }
 
   const booksRes = await axios.get("https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-books", booksConfig);
-  
+
   return {
     props: {
       categories: categoriesRes.data,

@@ -24,7 +24,7 @@ const BookCard = (props: BookProps) => {
       <h5 className="text-md md:text-xl text-white font-bold truncate">
         {props.book.title}
       </h5>
-      <p className="text-white text-xs md:text-sm">
+      <p className="text-white text-xs md:text-sm truncate">
         {(props.book.authors).join(", ")}
       </p>
     </div>
