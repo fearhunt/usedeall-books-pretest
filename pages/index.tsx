@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import type { NextPage } from "next";
 import { GetServerSideProps } from "next";
@@ -31,6 +31,22 @@ type HomeProps = {
 }
 
 const Home: NextPage<HomeProps> = ({ categories, books }) => {
+  const [keyword, setKeyword] = useState("");
+  const [displayedBooks, setDisplayedBooks] = useState<any>([]);
+
+  const filterDisplayedBooksByNameAndAuthors = () => {
+    const filteredBooks = books.filter((book: any) => (
+      (book.title).toLowerCase().includes(keyword.toLowerCase()) ||
+      (book.authors).find((author: string) => author.toLowerCase().includes(keyword.toLowerCase()))
+    ));
+
+    setDisplayedBooks(filteredBooks);
+  };
+
+  useEffect(() => {
+    filterDisplayedBooksByNameAndAuthors();
+  }, [books, keyword]);
+
   return (
     <>
       <Head>
@@ -41,16 +57,29 @@ const Home: NextPage<HomeProps> = ({ categories, books }) => {
 
       <main>
         <div className="container py-8">
-          <BookSearch />
+          <BookSearch handleChange={(event: any) => setKeyword(event.target.value)} />
 
           <CategoryList categories={categories} />
 
-          <BookGrid books={books} />
+          {displayedBooks.length > 0 ? (
+            <>
+              <BookGrid books={displayedBooks} />
 
-          <div className="mt-5 text-right space-x-2">
-            <PaginationButton text="Previous" type="prev" />
-            <PaginationButton text="Next" type="next" booksSize={books.length} />
-          </div>
+              <div className="mt-5 text-right space-x-2">
+                <PaginationButton text="Previous" type="prev" />
+                <PaginationButton text="Next" type="next" booksSize={displayedBooks.length} />
+              </div>
+            </>
+          ) : (
+            <div className="text-center">
+              <p className="text-xl font-bold mt-4 bg-gradient-to-tr from-accent-red to-accent-orange bg-clip-text text-transparent">
+                Oops!
+              </p>
+              <p className="text-sm text-gray-700">
+                Currently there's no books that fit with your search. But don't worry, we'll have new books soon!
+              </p>
+            </div>
+          )}
         </div>
       </main>
     </>

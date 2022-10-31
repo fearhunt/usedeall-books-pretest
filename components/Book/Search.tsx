@@ -1,6 +1,10 @@
 import React from "react";
 
-const BookSearch = () => {
+type CardSearchProps = {
+  handleChange: (event: any) => void;
+};
+
+const BookSearch = (props: CardSearchProps) => {
   return (
     <form action="" className="flex items-center">
       <div className="relative w-full">
@@ -10,7 +14,7 @@ const BookSearch = () => {
           </svg>
         </div>
 
-        <input id="input-search-book" type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-accent-primary focus:border-accent-primary block w-full pl-10 p-3" placeholder="Search" />
+        <input id="input-search-book" onChange={props.handleChange} type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-accent-primary focus:border-accent-primary block w-full pl-10 p-3" placeholder="Search" />
     </div>
     </form>
   )
