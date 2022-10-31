@@ -76,7 +76,8 @@ const Home: NextPage<HomeProps> = ({ categories, books }) => {
                 Oops!
               </p>
               <p className="text-sm text-gray-700">
-                Currently there's no books that fit with your search. But don't worry, we'll have new books soon!
+                Currently there's no book that fit with keyword <span className="font-bold">{keyword}</span>. <br /> 
+                But don't worry, we'll have new books soon!
               </p>
             </div>
           )}
