@@ -36,7 +36,6 @@ const BookCard = (props: BookProps) => {
       <Image src={props.book.cover_url} alt={`${props.book.title} by ${(props.book.authors).join(", ")}`} width={400} height={600} className="rounded-lg shadow-xl -mt-24 mb-4" />
       <h5 className="text-md md:text-xl text-white font-bold truncate">
         {props.book.title}
-        {props.bookIndex}
       </h5>
       <p className="text-white text-xs md:text-sm truncate">
         {(props.book.authors).join(", ")}
