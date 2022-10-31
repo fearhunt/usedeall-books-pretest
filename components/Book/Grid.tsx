@@ -22,7 +22,7 @@ const BookGrid = (props: BookGridProps) => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 my-2">
       {props.books.map((book: any, index: number) => (
-        <BookCard key={index} book={book} />
+        <BookCard key={index} book={book} bookIndex={index} />
       ))}
     </div>
   )

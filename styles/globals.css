@@ -27,6 +27,30 @@ a {
   .tab-btn-selected {
     @apply bg-gradient-to-tl from-primary to-accent-blue border-transparent font-medium text-white;
   }
+
+  .bg-usedeall-gradient-0 {
+    @apply bg-gradient-to-br from-accent-orange to-accent-red;
+  }
+
+  .bg-usedeall-gradient-1 {
+    @apply bg-gradient-to-br from-accent-red to-dark-primary;
+  }
+
+  .bg-usedeall-gradient-2 {
+    @apply bg-gradient-to-br from-dark-primary to-accent-blue;
+  }
+
+  .bg-usedeall-gradient-3 {
+    @apply bg-gradient-to-br from-accent-blue to-secondary;
+  }
+
+  .bg-usedeall-gradient-4 {
+    @apply bg-gradient-to-br from-secondary to-accent-green;
+  }
+
+  .bg-usedeall-gradient-5 {
+    @apply bg-gradient-to-br from-accent-green to-primary;
+  }
 }
 
 /* @media (prefers-color-scheme: dark) {
