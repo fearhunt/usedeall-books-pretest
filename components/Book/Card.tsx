@@ -2,27 +2,30 @@ import React from "react";
 import Image from "next/image";
 import clsx from "clsx";
 
-type BookProps = {
-  book: {
-    id: number;
+type Book = {
+  id: number;
+  title: string;
+  category_id: number;
+  authors: string[];
+  cover_url: string;
+  description: string;
+  sections: {
     title: string;
-    category_id: number;
-    authors: string[];
-    cover_url: string;
-    description: string;
-    sections: {
-      title: string;
-      content: string;
-    }[];
-    audio_length: number;
-  },
-  bookIndex: number
+    content: string;
+  }[];
+  audio_length: number;
+}
+
+type BookProps = {
+  book: Book,
+  bookIndex: number,
+  handleOpenModal: (content: Book) => void;
 }
 
 const BookCard = (props: BookProps) => {
   return (
     <div 
-      onClick={() => console.log('a')} 
+      onClick={() => props.handleOpenModal(props.book)} 
       className={clsx(
         "cursor-pointer rounded-lg shadow-lg transition-all hover:scale-105 p-5 md:px-8 md:py-6 mt-20",
         { "bg-usedeall-gradient-0": (props.bookIndex % 6) == 0},
