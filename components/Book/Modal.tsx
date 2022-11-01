@@ -1,5 +1,6 @@
-import React, { Fragment, useState, useEffect } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import React, { Fragment, useState, useEffect } from 'react';
+import Image from "next/image";
+import { Dialog, Transition } from '@headlessui/react';
 
 type BookModalProps = {
   isOpen: boolean;
@@ -12,7 +13,7 @@ const BookModal = (props: BookModalProps) => {
 
   useEffect(() => {
     setIsOpen(props.isOpen);
-  }, [props.isOpen])
+  }, [props.isOpen]);
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -40,8 +41,8 @@ const BookModal = (props: BookModalProps) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-lg transition-all">
-                <div className="flex justify-between">
+              <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-lg transition-all">
+                <div className="flex justify-between mb-4">
                   <Dialog.Title as="h6" className="text-lg font-bold leading-6 text-primary">
                     Book Detail
                   </Dialog.Title>
@@ -53,16 +54,15 @@ const BookModal = (props: BookModalProps) => {
                     X
                   </button>
                 </div>
-                {/* <div className="mt-2">
-                  <Image src={props.content.cover_url} alt={`${props.content.title} by ${(props.content.authors).join(", ")}`} width={400} height={600} className="rounded-lg shadow-xl -mt-24 mb-4" />
-                  <h5 className="text-md md:text-xl text-white font-bold truncate">
+                <div className="mt-2 text-center">
+                  <Image src={props.content.cover_url} alt={`${props.content.title} by ${(props.content.authors).join(", ")}`} width={400} height={600} className="rounded-lg mx-auto shadow-xl mb-6" />
+                  <h4 className="text-2xl md:text-4xl font-bold bg-usedeall-gradient-0 bg-clip-text text-transparent">
                     {props.content.title}
-                  </h5>
-                  <p className="text-white text-xs md:text-sm truncate">
+                  </h4>
+                  <p className="text-md md:text-lg font-medium text-gray-500">
                     {(props.content.authors).join(", ")}
                   </p>
-                </div> */}
-
+                </div>
               </Dialog.Panel>
             </Transition.Child>
           </div>

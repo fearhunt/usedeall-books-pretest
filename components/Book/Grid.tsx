@@ -22,9 +22,20 @@ type BookGridProps = {
 }
 
 const BookGrid = (props: BookGridProps) => {
+  const defaultBook = {
+    id: 0,
+    title: "",
+    category_id: 0,
+    authors: [],
+    cover_url: "",
+    description: "",
+    sections: [],
+    audio_length: 0
+  }
+
   // TODO Move to context
   const [isOpen, setIsOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
+  const [modalContent, setModalContent] = useState(defaultBook);
 
   const handleOpenModal = (content: any) => {
     setIsOpen(true);
@@ -33,7 +44,10 @@ const BookGrid = (props: BookGridProps) => {
 
   const handleCloseModal = () => {
     setIsOpen(false);
-    setModalContent(null);
+
+    setTimeout(() => {
+      setModalContent(defaultBook); // Prevent content to blank before modal closed
+    }, 300);
   };
 
   return (
