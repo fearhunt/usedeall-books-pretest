@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Image from "next/image";
 import { Dialog, Transition } from '@headlessui/react';
+import clsx from "clsx";
 
 import BookAccordion from "./Accordion";
 
@@ -12,10 +13,15 @@ type BookModalProps = {
 
 const BookModal = (props: BookModalProps) => {
   const [isOpen, setIsOpen] = useState(true);
+  const [isBookmarked, setIsBookmarked] = useState(true);
 
   useEffect(() => {
     setIsOpen(props.isOpen);
   }, [props.isOpen]);
+
+  const toggleBookmark = () => {
+    setIsBookmarked(!isBookmarked)
+  };
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -69,7 +75,17 @@ const BookModal = (props: BookModalProps) => {
 
                 <hr className="my-4 h-1 bg-gray-200 border-0" />
 
-                <div>
+                <button 
+                  onClick={() => toggleBookmark()} 
+                  className={clsx(
+                    "px-3 py-1 border-2 rounded-lg border-accent-blue/75 transition font-medium text-sm hover:shadow-md",
+                    { "bg-accent-blue text-white": isBookmarked }
+                  )}
+                >
+                  {isBookmarked ? 'Book saved ✨' : 'Save this book'}
+                </button>
+
+                <div className="mt-2">
                   <h5 className="font-medium mb-2">Description</h5>
 
                   <p className="text-sm text-justify">
