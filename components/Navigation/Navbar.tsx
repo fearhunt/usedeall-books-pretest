@@ -32,8 +32,8 @@ const Navbar = () => {
                   href={link.href}
                   className={clsx(
                     { "text-primary": router.pathname == link.href },
-                    { "hover:text-primary/50": router.pathname != link.href },
-                    "transition font-medium",
+                    { "text-neutral-500 hover:text-primary/50": router.pathname != link.href },
+                    "transition font-medium text-sm",
                   )}
                 >
                   {link.name}
@@ -63,8 +63,8 @@ const Navbar = () => {
               href={link.href}
               className={clsx(
                 { "text-primary": router.pathname == link.href },
-                { "hover:text-primary/50": router.pathname != link.href },
-                "transition font-medium block text-right",
+                { "text-neutral-500 hover:text-primary/50": router.pathname != link.href },
+                "transition font-medium text-sm block text-right",
               )}
             >
               {link.name}
