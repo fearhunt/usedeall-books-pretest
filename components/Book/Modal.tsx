@@ -5,22 +5,42 @@ import clsx from "clsx";
 
 import BookAccordion from "./Accordion";
 
+type Book = {
+  id: number;
+  title: string;
+  category_id: number;
+  authors: string[];
+  cover_url: string;
+  description: string;
+  sections: {
+    title: string;
+    content: string;
+  }[];
+  audio_length: number;
+}
+
 type BookModalProps = {
   isOpen: boolean;
-  content: any;
+  content: Book;
+  isBookmarkedContent: boolean;
   handleCloseModal: () => void;
+  handleBookmark: (book: Book) => void;
+  handleUnbookmark: (title: string) => void;
 }
 
 const BookModal = (props: BookModalProps) => {
   const [isOpen, setIsOpen] = useState(true);
-  const [isBookmarked, setIsBookmarked] = useState(true);
 
   useEffect(() => {
     setIsOpen(props.isOpen);
   }, [props.isOpen]);
 
   const toggleBookmark = () => {
-    setIsBookmarked(!isBookmarked)
+    if (!props.isBookmarkedContent) {
+      props.handleBookmark(props.content);
+    } else {
+      props.handleUnbookmark(props.content.title);
+    }
   };
 
   return (
@@ -79,10 +99,10 @@ const BookModal = (props: BookModalProps) => {
                   onClick={() => toggleBookmark()} 
                   className={clsx(
                     "px-3 py-1 border-2 rounded-lg border-accent-blue/75 transition font-medium text-sm hover:shadow-md",
-                    { "bg-accent-blue text-white": isBookmarked }
+                    { "bg-accent-blue text-white": props.isBookmarkedContent }
                   )}
                 >
-                  {isBookmarked ? 'Book saved ✨' : 'Save this book'}
+                  {props.isBookmarkedContent ? 'Book saved ✨' : 'Save this book'}
                 </button>
 
                 <div className="mt-2">
@@ -97,8 +117,8 @@ const BookModal = (props: BookModalProps) => {
                   <h5 className="font-medium mb-2">Sections</h5>
 
                   <div className="border border-secondary rounded-lg divide-y-2 divide-primary/25">
-                    {props.content.sections.map((section: any) => (
-                      <BookAccordion section={section} />
+                    {props.content.sections.map((section: any, index: number) => (
+                      <BookAccordion key={index} section={section} />
                     ))}
                   </div>
                 </div>

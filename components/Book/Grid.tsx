@@ -19,6 +19,9 @@ type Book = {
 
 type BookGridProps = {
   books: Book[];
+  bookmarks?: any; 
+  handleBookmark: (book: Book) => void;
+  handleUnbookmark: (title: string) => void;
 }
 
 const BookGrid = (props: BookGridProps) => {
@@ -34,30 +37,45 @@ const BookGrid = (props: BookGridProps) => {
   }
 
   // TODO Move to context
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenBookModal, setIsOpenBookModal] = useState(false);
+  const [isBookmarkedContent, setIsBookmarkedContent] = useState(false);
   const [modalContent, setModalContent] = useState(defaultBook);
 
   const handleOpenModal = (content: any) => {
-    setIsOpen(true);
+    setIsBookmarkedContent(props.bookmarks.some((book: Book) => book.title === content.title));
     setModalContent(content);
-    console.log(content)
+
+    setIsOpenBookModal(true);
   };
 
   const handleCloseModal = () => {
-    setIsOpen(false);
+    setIsOpenBookModal(false);
 
     setTimeout(() => {
       setModalContent(defaultBook); // Prevent content to blank before modal closed
+      setIsBookmarkedContent(false);
     }, 300);
   };
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 my-2">
       {props.books.map((book: any, index: number) => (
-        <BookCard key={index} handleOpenModal={(content: Book) => handleOpenModal(content)} book={book} bookIndex={index} />
+        <BookCard 
+          key={index} 
+          book={book} 
+          bookIndex={index}
+          handleOpenModal={(content: Book) => handleOpenModal(content)} 
+        />
       ))}
 
-      <BookModal handleCloseModal={() => handleCloseModal()} isOpen={isOpen} content={modalContent} />
+      <BookModal 
+        isOpen={isOpenBookModal} 
+        content={modalContent} 
+        isBookmarkedContent={isBookmarkedContent} 
+        handleCloseModal={() => handleCloseModal()} 
+        handleBookmark={(book: Book) => props.handleBookmark(book)} 
+        handleUnbookmark={(title: string) => props.handleUnbookmark(title)} 
+      />
     </div>
   )
 };

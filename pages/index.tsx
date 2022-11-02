@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Head from "next/head";
 import type { NextPage } from "next";
 import { GetServerSideProps } from "next";
@@ -10,29 +10,57 @@ import BookGrid from "../components/Book/Grid";
 import CategoryList from "../components/Category/List";
 import PaginationButton from "../components/Pagination/Button";
 
+type Book = {
+  id: number;
+  title: string;
+  category_id: number;
+  authors: string[];
+  cover_url: string;
+  description: string;
+  sections: {
+    title: string;
+    content: string;
+  }[];
+  audio_length: number;
+}
+
 type HomeProps = {
   categories: {
     id: number;
     name: string;
   }[];
-  books: {
-    id: number;
-    title: string;
-    category_id: number;
-    authors: string[];
-    cover_url: string;
-    description: string;
-    sections: {
-      title: string;
-      content: string;
-    }[];
-    audio_length: number;
-  }[];
+  books: Book[];
 }
 
 const Home: NextPage<HomeProps> = ({ categories, books }) => {
+  const isInitialMount = useRef(true);
+
+  // TODO Move to context
   const [keyword, setKeyword] = useState("");
   const [displayedBooks, setDisplayedBooks] = useState<any>([]);
+  const [bookmarks, setBookmarks] = useState<any>([]);
+
+  useEffect(() => {
+    setBookmarks(JSON.parse(window.localStorage.getItem("bookmarks") ?? "[]"));
+    console.log(bookmarks)
+  }, []);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      // Update localStorage on change bookmarks state
+      window.localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+    }
+  }, [bookmarks]);
+
+  const handleBookmark = (book: Book) => {
+    console.log(book)
+  };
+
+  const handleUnbookmark = (title: string) => {
+    console.log(title)
+  }
 
   const filterDisplayedBooksByNameAndAuthors = () => {
     const filteredBooks = books.filter((book: any) => (
@@ -63,7 +91,12 @@ const Home: NextPage<HomeProps> = ({ categories, books }) => {
 
           {displayedBooks.length > 0 ? (
             <>
-              <BookGrid books={displayedBooks} />
+              <BookGrid 
+                books={displayedBooks} 
+                bookmarks={bookmarks} 
+                handleBookmark={(book: Book) => handleBookmark(book)}
+                handleUnbookmark={(title: string) => handleUnbookmark(title)}
+              />
 
               <div className="mt-5 text-right space-x-2">
                 <PaginationButton text="Previous" type="prev" />
