@@ -65,14 +65,16 @@ const BookGrid = (props: BookGridProps) => {
         />
       ))}
 
-      <BookModal 
-        isOpen={isOpenBookModal} 
-        content={modalContent} 
-        isBookmarkedContent={props.bookmarks.some((book: Book) => book.title === modalContent.title)} 
-        handleCloseModal={() => handleCloseModal()} 
-        handleBookmark={(book: Book) => props.handleBookmark(book)} 
-        handleUnbookmark={(title: string) => props.handleUnbookmark(title)} 
-      />
+      {modalContent.id.toString() && (
+        <BookModal 
+          isOpen={isOpenBookModal} 
+          content={modalContent} 
+          isBookmarkedContent={props.bookmarks.some((book: Book) => book.title === modalContent.title)} 
+          handleCloseModal={() => handleCloseModal()} 
+          handleBookmark={(book: Book) => props.handleBookmark(book)} 
+          handleUnbookmark={(title: string) => props.handleUnbookmark(title)} 
+        />
+      )}
     </div>
   )
 };

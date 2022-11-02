@@ -48,7 +48,6 @@ const Home: NextPage<HomeProps> = ({ categories, books }) => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
-      console.log(bookmarks)
       // Update localStorage on change bookmarks state
       window.localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
     }
