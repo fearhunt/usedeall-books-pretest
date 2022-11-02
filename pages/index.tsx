@@ -42,28 +42,33 @@ const Home: NextPage<HomeProps> = ({ categories, books }) => {
 
   useEffect(() => {
     setBookmarks(JSON.parse(window.localStorage.getItem("bookmarks") ?? "[]"));
-    console.log(bookmarks)
   }, []);
 
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
+      console.log(bookmarks)
       // Update localStorage on change bookmarks state
       window.localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
     }
   }, [bookmarks]);
 
   const handleBookmark = (book: Book) => {
-    console.log(book)
+    setBookmarks([
+      ...bookmarks,
+      book
+    ]);
   };
 
   const handleUnbookmark = (title: string) => {
-    console.log(title)
+    const filteredBookmarks = bookmarks.filter((book: Book) => book.title !== title);
+
+    setBookmarks(filteredBookmarks);
   }
 
   const filterDisplayedBooksByNameAndAuthors = () => {
-    const filteredBooks = books.filter((book: any) => (
+    const filteredBooks = books.filter((book: Book) => (
       (book.title).toLowerCase().includes(keyword.toLowerCase()) ||
       (book.authors).find((author: string) => author.toLowerCase().includes(keyword.toLowerCase()))
     ));

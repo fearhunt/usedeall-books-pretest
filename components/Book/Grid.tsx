@@ -38,11 +38,9 @@ const BookGrid = (props: BookGridProps) => {
 
   // TODO Move to context
   const [isOpenBookModal, setIsOpenBookModal] = useState(false);
-  const [isBookmarkedContent, setIsBookmarkedContent] = useState(false);
   const [modalContent, setModalContent] = useState(defaultBook);
 
   const handleOpenModal = (content: any) => {
-    setIsBookmarkedContent(props.bookmarks.some((book: Book) => book.title === content.title));
     setModalContent(content);
 
     setIsOpenBookModal(true);
@@ -53,7 +51,6 @@ const BookGrid = (props: BookGridProps) => {
 
     setTimeout(() => {
       setModalContent(defaultBook); // Prevent content to blank before modal closed
-      setIsBookmarkedContent(false);
     }, 300);
   };
 
@@ -71,7 +68,7 @@ const BookGrid = (props: BookGridProps) => {
       <BookModal 
         isOpen={isOpenBookModal} 
         content={modalContent} 
-        isBookmarkedContent={isBookmarkedContent} 
+        isBookmarkedContent={props.bookmarks.some((book: Book) => book.title === modalContent.title)} 
         handleCloseModal={() => handleCloseModal()} 
         handleBookmark={(book: Book) => props.handleBookmark(book)} 
         handleUnbookmark={(title: string) => props.handleUnbookmark(title)} 
