@@ -13,7 +13,8 @@ module.exports = {
         "accent-red": "#F252A7",
         "accent-green": "#008A87",
         "accent-orange": "#FA6B26",
-        "accent-blue": "#1578CE"
+        "accent-blue": "#1578CE",
+        "accent-yellow": "#F9E05B"
       },
       container: {
         center: true,

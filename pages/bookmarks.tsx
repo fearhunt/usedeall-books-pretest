@@ -25,7 +25,7 @@ type Book = {
   audio_length: number;
 }
 
-type HomeProps = {
+type BookmarksProps = {
   categories: {
     id: number;
     name: string;
@@ -33,7 +33,7 @@ type HomeProps = {
   books: Book[];
 }
 
-const Home: NextPage<HomeProps> = ({ categories, books }) => {
+const Bookmarks: NextPage<BookmarksProps> = ({ categories, books }) => {
   const isInitialMount = useRef(true);
 
   // TODO Move to context
@@ -83,7 +83,7 @@ const Home: NextPage<HomeProps> = ({ categories, books }) => {
   return (
     <>
       <Head>
-        <title>UseDeall Books</title>
+        <title>UseDeall Books | Bookmarks</title>
         <meta name="description" content="Book your favorite here!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -93,8 +93,6 @@ const Home: NextPage<HomeProps> = ({ categories, books }) => {
       <main>
         <div className="container py-8">
           <BookSearch handleChange={(event: any) => setKeyword(event.target.value)} />
-
-          <CategoryList categories={categories} />
 
           {displayedBooks.length > 0 ? (
             <>
@@ -148,4 +146,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 }
 
-export default Home;
+export default Bookmarks;

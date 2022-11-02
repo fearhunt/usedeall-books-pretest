@@ -45,7 +45,7 @@ const BookModal = (props: BookModalProps) => {
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={() => props.handleCloseModal()}>
+      <Dialog as="div" className="relative z-50" onClose={() => props.handleCloseModal()}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
