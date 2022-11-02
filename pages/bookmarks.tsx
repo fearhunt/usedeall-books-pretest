@@ -25,15 +25,7 @@ type Book = {
   audio_length: number;
 }
 
-type BookmarksProps = {
-  categories: {
-    id: number;
-    name: string;
-  }[];
-  books: Book[];
-}
-
-const Bookmarks: NextPage<BookmarksProps> = ({ categories, books }) => {
+const Bookmarks: NextPage = () => {
   const isInitialMount = useRef(true);
 
   // TODO Move to context
@@ -68,7 +60,7 @@ const Bookmarks: NextPage<BookmarksProps> = ({ categories, books }) => {
   }
 
   const filterDisplayedBooksByNameAndAuthors = () => {
-    const filteredBooks = books.filter((book: Book) => (
+    const filteredBooks = bookmarks.filter((book: Book) => (
       (book.title).toLowerCase().includes(keyword.toLowerCase()) ||
       (book.authors).find((author: string) => author.toLowerCase().includes(keyword.toLowerCase()))
     ));
@@ -78,7 +70,7 @@ const Bookmarks: NextPage<BookmarksProps> = ({ categories, books }) => {
 
   useEffect(() => {
     filterDisplayedBooksByNameAndAuthors();
-  }, [books, keyword]);
+  }, [bookmarks, keyword]);
 
   return (
     <>
@@ -95,19 +87,12 @@ const Bookmarks: NextPage<BookmarksProps> = ({ categories, books }) => {
           <BookSearch handleChange={(event: any) => setKeyword(event.target.value)} />
 
           {displayedBooks.length > 0 ? (
-            <>
-              <BookGrid 
-                books={displayedBooks} 
-                bookmarks={bookmarks} 
-                handleBookmark={(book: Book) => handleBookmark(book)}
-                handleUnbookmark={(title: string) => handleUnbookmark(title)}
-              />
-
-              <div className="mt-5 text-right space-x-2">
-                <PaginationButton text="Previous" type="prev" />
-                <PaginationButton text="Next" type="next" booksSize={displayedBooks.length} />
-              </div>
-            </>
+            <BookGrid 
+              books={displayedBooks} 
+              bookmarks={bookmarks} 
+              handleBookmark={(book: Book) => handleBookmark(book)}
+              handleUnbookmark={(title: string) => handleUnbookmark(title)}
+            />
           ) : (
             <div className="text-center">
               <p className="text-xl font-bold mt-4 bg-gradient-to-tr from-accent-red to-accent-orange bg-clip-text text-transparent">
