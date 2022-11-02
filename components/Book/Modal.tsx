@@ -2,6 +2,8 @@ import React, { Fragment, useState, useEffect } from 'react';
 import Image from "next/image";
 import { Dialog, Transition } from '@headlessui/react';
 
+import BookAccordion from "./Accordion";
+
 type BookModalProps = {
   isOpen: boolean;
   content: any;
@@ -43,7 +45,7 @@ const BookModal = (props: BookModalProps) => {
             >
               <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-lg transition-all">
                 <div className="flex justify-between mb-4">
-                  <Dialog.Title as="h6" className="text-lg font-bold leading-6 text-primary">
+                  <Dialog.Title as="h6" className="text-lg md:text-xl font-bold leading-6 text-primary">
                     Book Detail
                   </Dialog.Title>
                   <button
@@ -54,6 +56,7 @@ const BookModal = (props: BookModalProps) => {
                     X
                   </button>
                 </div>
+
                 <div className="mt-2 text-center">
                   <Image src={props.content.cover_url} alt={`${props.content.title} by ${(props.content.authors).join(", ")}`} width={400} height={600} className="rounded-lg mx-auto shadow-xl mb-6" />
                   <h4 className="text-2xl md:text-4xl font-bold bg-usedeall-gradient-0 bg-clip-text text-transparent">
@@ -62,6 +65,26 @@ const BookModal = (props: BookModalProps) => {
                   <p className="text-md md:text-lg font-medium text-gray-500">
                     {(props.content.authors).join(", ")}
                   </p>
+                </div>
+
+                <hr className="my-4 h-1 bg-gray-200 border-0" />
+
+                <div>
+                  <h5 className="font-medium mb-2">Description</h5>
+
+                  <p className="text-sm text-justify">
+                    {props.content.description}
+                  </p>
+                </div>
+
+                <div className="mt-4">
+                  <h5 className="font-medium mb-2">Sections</h5>
+
+                  <div className="border border-secondary rounded-lg divide-y-2 divide-primary/25">
+                    {props.content.sections.map((section: any) => (
+                      <BookAccordion section={section} />
+                    ))}
+                  </div>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

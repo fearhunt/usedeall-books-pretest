@@ -40,6 +40,7 @@ const BookGrid = (props: BookGridProps) => {
   const handleOpenModal = (content: any) => {
     setIsOpen(true);
     setModalContent(content);
+    console.log(content)
   };
 
   const handleCloseModal = () => {
