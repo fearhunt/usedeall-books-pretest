@@ -29,7 +29,7 @@ type BookModalProps = {
 }
 
 const BookModal = (props: BookModalProps) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setIsOpen(props.isOpen);
