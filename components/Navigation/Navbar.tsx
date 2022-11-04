@@ -27,7 +27,7 @@ const Navbar = () => {
             </div>
             <div className="hidden sm:ml-6 sm:flex items-center justify-center space-x-2">
               {links.map((link, index) => (
-                <a 
+                <Link 
                   key={index}
                   href={link.href}
                   className={clsx(
@@ -37,7 +37,7 @@ const Navbar = () => {
                   )}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -58,7 +58,7 @@ const Navbar = () => {
       <Disclosure.Panel className="sm:hidden">
         <div className="space-y-1 p-2">
           {links.map((link, index) => (
-            <a 
+            <Link 
               key={index}
               href={link.href}
               className={clsx(
@@ -68,7 +68,7 @@ const Navbar = () => {
               )}
             >
               {link.name}
-            </a>
+            </Link>
           ))}
         </div>
       </Disclosure.Panel>
