@@ -13,6 +13,7 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Built version hosted on Vercel App: [https://usedeall-books-pretest.vercel.app/](https://usedeall-books-pretest.vercel.app/)
 
 ## Tech Stacks
 
