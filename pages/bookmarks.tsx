@@ -1,15 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import Head from "next/head";
 import type { NextPage } from "next";
-import { GetServerSideProps } from "next";
-
-import axios from "axios";
 
 import Navbar from "../components/Navigation/Navbar";
 import BookSearch from "../components/Book/Search";
 import BookGrid from "../components/Book/Grid";
-import CategoryList from "../components/Category/List";
-import PaginationButton from "../components/Pagination/Button";
 
 type Book = {
   id: number;
@@ -108,27 +103,6 @@ const Bookmarks: NextPage = () => {
       </main>
     </>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const categoriesRes = await axios.get("https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-categories");
-
-  const booksConfig = {
-    params: {
-      categoryId: context.query.categoryId ?? 1,
-      page: context.query.page ?? 0,
-      size: context.query.size ?? 12, 
-    }
-  }
-
-  const booksRes = await axios.get("https://asia-southeast2-sejutacita-app.cloudfunctions.net/fee-assessment-books", booksConfig);
-
-  return {
-    props: {
-      categories: categoriesRes.data,
-      books: booksRes.data
-    }
-  }
 }
 
 export default Bookmarks;
